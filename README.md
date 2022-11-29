@@ -7,7 +7,7 @@
 ![Circle test](./doc/circle_test.gif) Circle test | ![East Asia test](./doc/East_asia_5_env.gif) East Asia test
 
 ![Northern East Asia test01](./doc/northern_east_asia_01.gif) Northern East Asia test01 |  ![Northern East Asia test02](./doc/northern_east_asia_02.gif) Northern East Asia test02
-
+:-------------------------:|:-------------------------:
 ![Northern East Asia test03](./doc/northern_east_asia_03.gif) Northern East Asia test03 |  ![Northern East Asia test04](./doc/northern_east_asia_04.gif) Northern East Asia test04
 
 
