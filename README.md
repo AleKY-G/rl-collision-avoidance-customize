@@ -2,7 +2,13 @@
 
 기존 논문을 [Towards Optimally Decentralized Multi-Robot Collision Avoidance via Deep Reinforcement Learning](https://arxiv.org/abs/1709.10082) 구현한 pytorch 프로젝트 (https://github.com/Acmece/rl-collision-avoidance) 를 수정해서 활용한 코드입니다. 더 많은 정보는 위 링크에서 찾으실 수 있습니다.
 
-![Stage1 training](./doc/Stage1_learning.gif) |  ![Stage2 training](./doc/Stage2_learning.gif)  |  ![Circle test](./doc/circle_test.gif) | ![East Asia test](./doc/East_asia_5_env.gif) | ![Northern East Asia test01](./doc/northern_east_asia_01.gif) |  ![Northern East Asia test02](./doc/northern_east_asia_02.gif) |  ![Northern East Asia test03](./doc/northern_east_asia_03.gif)  |  ![Northern East Asia test04](./doc/northern_east_asia_04.gif)    
+![Stage1 training](./doc/Stage1_learning.gif) Stage1 training |  ![Stage2 training](./doc/Stage2_learning.gif) Stage2 training     
+:-------------------------:|:-------------------------:
+![Circle test](./doc/circle_test.gif) Circle test | ![East Asia test](./doc/East_asia_5_env.gif) East Asia test
+:-------------------------:|:-------------------------:
+![Northern East Asia test01](./doc/northern_east_asia_01.gif) Northern East Asia test01 |  ![Northern East Asia test02](./doc/northern_east_asia_02.gif) Northern East Asia test02
+:-------------------------:|:-------------------------:
+![Northern East Asia test03](./doc/northern_east_asia_03.gif) Northern East Asia test03 |  ![Northern East Asia test04](./doc/northern_east_asia_04.gif) Northern East Asia test04
 :-------------------------:|:-------------------------:
 
 ## Docker Container Image
