@@ -1,0 +1,8 @@
+prefix=/root/rl-collision-avoidance/catkin_ws/install
+
+Name: stage_ros_add_pose_and_crash
+Description: Description of stage_ros_add_pose_and_crash
+Version: 1.7.5
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

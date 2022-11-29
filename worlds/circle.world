@@ -2,7 +2,7 @@ show_clock 0
 show_clock_interval 10000
 resolution 0.01
 threads 4
-speedup 1
+speedup 20 
 
 define sicklaser ranger
 (

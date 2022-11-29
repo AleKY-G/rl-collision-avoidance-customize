@@ -6,6 +6,8 @@ import numpy as np
 import rospy
 import torch
 import torch.nn as nn
+# additional garbage collector
+import gc
 from mpi4py import MPI
 
 from torch.optim import Adam
@@ -49,8 +51,8 @@ def run(comm, env, policy, policy_path, action_bound, optimizer):
 
 
     for id in range(MAX_EPISODES):
+        
         env.reset_pose()
-
         env.generate_goal_point()
         terminal = False
         ep_reward = 0
@@ -129,6 +131,7 @@ def run(comm, env, policy, policy_path, action_bound, optimizer):
         logger.info('Env %02d, Goal (%05.1f, %05.1f), Episode %05d, setp %03d, Reward %-5.1f, Distance %05.1f, %s' % \
                     (env.index, env.goal_point[0], env.goal_point[1], id + 1, step, ep_reward, distance, result))
         logger_cal.info(ep_reward)
+        
 
 
 
@@ -175,19 +178,19 @@ if __name__ == '__main__':
         policy_path = 'policy'
         # policy = MLPPolicy(obs_size, act_size)
         policy = CNNPolicy(frames=LASER_HIST, action_space=2)
-        policy.cuda()
+        # policy.cuda()
         opt = Adam(policy.parameters(), lr=LEARNING_RATE)
         mse = nn.MSELoss()
 
         if not os.path.exists(policy_path):
             os.makedirs(policy_path)
 
-        file = policy_path + '/stage1_2.pth'
+        file = policy_path + '/Stage1_700'
         if os.path.exists(file):
             logger.info('####################################')
             logger.info('############Loading Model###########')
             logger.info('####################################')
-            state_dict = torch.load(file)
+            state_dict = torch.load(file, map_location=torch.device('cpu'))
             policy.load_state_dict(state_dict)
         else:
             logger.info('#####################################')

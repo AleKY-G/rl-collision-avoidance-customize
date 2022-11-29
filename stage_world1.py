@@ -80,7 +80,7 @@ class StageWorld():
                 or self.speed_GT is None or self.state_GT is None:
             pass
 
-        rospy.sleep(1.)
+        rospy.sleep(2) # 4times
         # # What function to call when you ctrl + c
         # rospy.on_shutdown(self.shutdown)
 
@@ -165,7 +165,7 @@ class StageWorld():
         self.step_goal = [0., 0.]
         self.step_r_cnt = 0.
         self.start_time = time.time()
-        rospy.sleep(0.5)
+        rospy.sleep(2) # 4 times
 
 
     def generate_goal_point(self):
@@ -212,7 +212,7 @@ class StageWorld():
 
     def reset_pose(self):
         random_pose = self.generate_random_pose()
-        rospy.sleep(0.01)
+        rospy.sleep(0.10) #10times
         self.control_pose(random_pose)
         [x_robot, y_robot, theta] = self.get_self_stateGT()
 
@@ -220,7 +220,7 @@ class StageWorld():
         while np.abs(random_pose[0] - x_robot) > 0.2 or np.abs(random_pose[1] - y_robot) > 0.2:
             [x_robot, y_robot, theta] = self.get_self_stateGT()
             self.control_pose(random_pose)
-        rospy.sleep(0.01)
+        rospy.sleep(0.10) # 10times
 
 
     def control_vel(self, action):

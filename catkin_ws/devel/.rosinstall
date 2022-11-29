@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /root/rl-collision-avoidance/catkin_ws/devel/setup.sh

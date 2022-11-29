@@ -129,7 +129,7 @@ def run(comm, env, policy, policy_path, action_bound, optimizer):
 
         if env.index == 0:
             if global_update != 0 and global_update % 20 == 0:
-                torch.save(policy.state_dict(), policy_path + '/stage2_{}.pth'.format(global_update))
+                torch.save(policy.state_dict(), policy_path + '/stage2_2_{}.pth'.format(global_update))
                 logger.info('########################## model saved when update {} times#########'
                             '################'.format(global_update))
 
@@ -184,7 +184,7 @@ if __name__ == '__main__':
         policy_path = 'policy'
         # policy = MLPPolicy(obs_size, act_size)
         policy = CNNPolicy(frames=LASER_HIST, action_space=2)
-        policy.cuda()
+        #policy.cuda()
         opt = Adam(policy.parameters(), lr=LEARNING_RATE)
         mse = nn.MSELoss()
 
@@ -196,7 +196,8 @@ if __name__ == '__main__':
             logger.info('####################################')
             logger.info('############Loading Model###########')
             logger.info('####################################')
-            state_dict = torch.load(file)
+            #state_dict = torch.load(file)
+            state_dict = torch.load(file, map_location=torch.device('cpu'))
             policy.load_state_dict(state_dict)
         else:
             logger.info('#####################################')
