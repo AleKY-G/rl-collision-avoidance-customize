@@ -1,9 +1,17 @@
 # rl-collision-avoidance
 
-This is a Pytorch implementation of the paper [Towards Optimally Decentralized Multi-Robot Collision Avoidance via Deep Reinforcement Learning](https://arxiv.org/abs/1709.10082)
+기존 논문을 [Towards Optimally Decentralized Multi-Robot Collision Avoidance via Deep Reinforcement Learning](https://arxiv.org/abs/1709.10082) 구현한 pytorch 프로젝트 (https://github.com/Acmece/rl-collision-avoidance) 를 수정해서 활용한 코드입니다. 더 많은 정보는 위 링크에서 찾으실 수 있습니다.
 
-![](./doc/stage2.gif)  |  ![](./doc/circle_test.gif)
+![](./doc/Stage1_learning.gif) Stage1 training |  ![](./doc/Stage2_learning.gif) Stage2 training | ![](./doc/circle_test.gif) Circle test | ![](./doc/East_asia_5_env.gif) East Asia test | ![](./doc/northern_east_asia_01.gif) Northern East Asia test01 | ![](./doc/northern_east_asia_02.gif) Northern East Asia test02 | ![](./doc/northern_east_asia_03.gif) Northern East Asia test03 | ![](./doc/northern_east_asia_04.gif) Northern East Asia test04   
 :-------------------------:|:-------------------------:
+
+## Docker Container Image
+
+- https://hub.docker.com/r/hyunsung1264/collision-avoid-rl-ubuntu16.04-python2.7-pytorch_cpu
+	- > ubuntu 16.04
+	- > pytorch 1.5.0+cpu
+	- > Intel Xeon Gold 6330
+
 
 ## Requirement
 
@@ -14,9 +22,8 @@ This is a Pytorch implementation of the paper [Towards Optimally Decentralized M
 - [PyTorch](http://pytorch.org/)
 
 
-## How to train
-You may start with training in Stage1 and when it is well-trained you can transfer to Stage2 base on the policy model of Stage1, this is exactly what Curriculum Learning means. Training Stage2 from scratch may converge at a lower performance or not even converge.
-Please note that the motivation of training in Stage2 is to generalize the model, which hopefully can work well in real environment.
+## How to Simulate
+
 
 Please use the `stage_ros-add_pose_and_crash` package instead of the default package provided by ROS.
 ```
@@ -26,37 +33,31 @@ cd catkin_ws
 catkin_make
 source devel/setup.bash
 ```
+To use GUI on Windows
+Install VcXsrv
+and export display address from docker container terminal
+```
+export DISPLAY=xxx.xxx.xx.xxx:0.0
+```
 
-To train Stage1, modify the hyper-parameters in `ppo_stage1.py` as you like, and running the following command:
-```
-(leave out the -g if you want to see the GUI while training)
-rosrun stage_ros_add_pose_and_crash stageros -g worlds/stage1.world
-mpiexec -np 24 python ppo_stage1.py
-```
-To train Stage2, modify the hyper-parameters in `ppo_stage2.py` as you like, and running the following command:
-```
-rosrun stage_ros_add_pose_and_crash stageros -g worlds/stage2.world
-mpiexec -np 44 python ppo_stage2.py
-```
-## How to test
+To simulate `circle_test.py`, run the following command:
 
+First Initialize the stage
 ```
 rosrun stage_ros_add_pose_and_crash stageros worlds/circle.world
-mpiexec -np 50 python circle_test.py
+```
+Then run the python code
+```
+mpiexec -allow-run-as-root -np 50 python circle_test.py
+```
+To simulate `east_asia_test.py`, run the following command:
+
+First Initialize the stage
+```
+rosrun stage_ros_add_pose_and_crash stageros worlds/north_east_asia.world
+```
+Then run the python code
+```
+mpiexec -allow-run-as-root -np 16 python east_asia_test.py
 ```
 
-## Notice
-I am not the author of the paper and not in their group either. You may contact [Jia Pan](https://sites.google.com/site/panjia/) (jpan@cs.hku.hk) for the paper related issues. 
-If you find it useful and use it in your project, please consider citing:
-```
-@misc{Tianyu2018,
-	author = {Tianyu Liu},
-	title = {Robot Collision Avoidance via Deep Reinforcement Learning},
-	year = {2018},
-	publisher = {GitHub},
-	journal = {GitHub repository},
-	howpublished = {\url{https://github.com/Acmece/rl-collision-avoidance.git}},
-	commit = {7bc682403cb9a327377481be1f110debc16babbd}
-}
-```
-# rl-collision-avoidance-customize
